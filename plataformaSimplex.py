@@ -33,7 +33,8 @@ for i in range(num_vars):
     coef_c.append(cols[i].number_input(f"Coef. de x{i+1}", value=1.0, key=f"c{i}"))
 
 # Restrições
-st.markdown("### Restrições (≤):")
+# {'≤' if mode == 'max' else '≥'}
+st.markdown(f"### Restrições ({'≤' if modo == 'max' else '≥'}):")
 A, b = [], []
 for j in range(num_rest):
     cols = st.columns(num_vars + 1)
