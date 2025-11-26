@@ -16,7 +16,7 @@ A plataforma está disponível publicamente e hospedada no Streamlit Cloud.
 
 ## ✨ Funcionalidades Principais
 
-* **Seleção de Método:** Permite ao usuário escolher entre "Primal Simplex" e "Dual Simplex".
+* **Seleção de Método:** Permite ao usuário escolher entre "Primal Simplex", "Dual Simplex" e "Automático".
 * **Modo de Otimização:** Suporta problemas de Maximização (`max`) e Minimização (`min`).
 * **Entrada Dinâmica:** O usuário pode definir o número de variáveis e restrições que o problema possui.
 * **Visualização Passo a Passo:** A principal funcionalidade. A plataforma não mostra apenas a resposta final, mas exibe cada "Quadro" (tableau) do Simplex em cada iteração, facilitando o aprendizado e a verificação.
