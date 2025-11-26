@@ -1,81 +1,89 @@
 # 🧮 PlataformaSimplex
 
-Uma ferramenta web interativa para resolver problemas de Programação Linear (PL) passo a passo. Esta plataforma permite ao usuário inserir os coeficientes da função objetivo e das restrições, escolhendo entre os métodos **Primal Simplex** e **Dual Simplex** para encontrar a solução ótima.
-
-A aplicação é construída em Python usando Streamlit para a interface de usuário e NumPy para os cálculos matemáticos.
+Uma ferramenta web interativa e educativa para resolver problemas de Programação Linear (PL). Projetada para estudantes e profissionais, a plataforma resolve desde problemas simples até casos complexos com restrições mistas, mostrando todo o passo a passo do algoritmo.
 
 ---
 
-## 🚀 Acessar a Aplicação (Deploy)
+## 🚀 Acesse Agora
 
-A plataforma está disponível publicamente e hospedada no Streamlit Cloud.
+A aplicação está rodando na nuvem e pronta para uso. Não é necessário instalar nada!
 
-**Acesse aqui: [Plataforma Simplex](https://plataformasimplex-b6tyannbyswusrqgypdul3.streamlit.app/)**
+### 👉 [Clique aqui para acessar a Plataforma Simplex](https://plataformasimplex-b6tyannbyswusrqgypdul3.streamlit.app/)
 
 ---
 
-## ✨ Funcionalidades Principais
+## 📖 Guia de Uso
 
-* **Seleção de Método:** Permite ao usuário escolher entre "Primal Simplex", "Dual Simplex" e "Automático".
-* **Modo de Otimização:** Suporta problemas de Maximização (`max`) e Minimização (`min`).
-* **Entrada Dinâmica:** O usuário pode definir o número de variáveis e restrições que o problema possui.
-* **Visualização Passo a Passo:** A principal funcionalidade. A plataforma não mostra apenas a resposta final, mas exibe cada "Quadro" (tableau) do Simplex em cada iteração, facilitando o aprendizado e a verificação.
-* **Relatório Final:** Apresenta o valor ótimo da função objetivo (Z) e os valores finais das variáveis básicas.
+A plataforma foi desenhada para ser intuitiva. Siga os passos abaixo para resolver seu problema:
 
-## 🛠️ Tecnologias Utilizadas
+### 1. Configuração Inicial (Barra Lateral)
+No menu à esquerda, defina as bases do seu problema:
+* **Método:**
+    * **Automático:** A opção mais poderosa. O sistema analisa suas restrições e escolhe sozinho entre *Primal*, *Dual* ou *Big M*. Permite usar $\le$, $\ge$ e $=$.
+    * **Primal Simplex:** Para problemas na forma padrão (apenas restrições $\le$ e RHS positivo).
+    * **Dual Simplex:** Para problemas onde a solução inicial é "otimista" mas infactível (ex: restrições $\ge$ convertidas).
+* **Modo de Otimização:** Escolha se deseja **Maximizar** (lucro, produção) ou **Minimizar** (custo, tempo).
+* **Dimensões:** Defina quantas **variáveis de decisão** ($x$) e quantas **restrições** o problema possui.
 
-* **Python**
-* **Streamlit:** Para a criação da interface web interativa.
-* **NumPy:** Para os cálculos matriciais e manipulação eficiente do tableau.
-* **Pandas:** Para a formatação e exibição elegante dos quadros (tableaus).
+### 2. Inserindo os Dados
+Após configurar, preencha os campos que aparecem na tela principal:
 
-## 🚀 Como Executar Localmente
+* **Função Objetivo (Z):** Digite os coeficientes que acompanham cada variável na função que você quer otimizar.
+* **Restrições:**
+    * Se estiver no **Modo Automático**, você verá uma caixa de seleção para cada linha. Você pode misturar restrições do tipo Menor ou Igual ($\le$), Maior ou Igual ($\ge$) e Igualdade ($=$).
+    * Digite os coeficientes das variáveis e o termo independente (RHS - *Right Hand Side*).
 
-Siga os passos abaixo para executar o projeto na sua máquina.
+### 3. Interpretando os Resultados
+Ao clicar em **"🚀 Resolver"**, a mágica acontece:
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/Edy-py/PlataformaSimplex.git](https://github.com/Edy-py/PlataformaSimplex.git)
-    cd PlataformaSimplex
-    ```
+* **Passo a Passo:** A plataforma exibe cada quadro (*tableau*) gerado pelo algoritmo. Você pode ver quem entra na base, quem sai e como os valores mudam a cada iteração.
+* **Diagnóstico Automático:** O sistema avisa qual método foi escolhido (ex: *"Igualdades detectadas: Usando Método Big M"*).
+* **Quadro Final:** Um resumo elegante mostrando:
+    * O valor ótimo de **Z**.
+    * Os valores finais das variáveis de decisão ($x_1, x_2, ...$).
+    * Variáveis de folga ou excesso resultantes.
 
-2.  **Crie e ative um ambiente virtual (recomendado):**
-    ```bash
-    # Linux/macOS
-    python3 -m venv .venv
-    source .venv/bin/activate
-    
-    # Windows
-    python -m venv .venv
-    .\.venv\Scripts\activate
-    ```
+---
 
-3.  **Instale as dependências:**
-    (Recomenda-se criar um arquivo `requirements.txt` com `streamlit`, `numpy` e `pandas`)
-    ```bash
-    pip install streamlit numpy pandas
-    ```
+## ✨ Funcionalidades Detalhadas
 
-4.  **Execute a aplicação Streamlit:**
-    ```bash
-    streamlit run plataformaSimplex.py
-    ```
+A Plataforma Simplex é completa e suporta:
 
-5.  Acesse `http://localhost:8501` no seu navegador.
+### 🤖 Modo Automático Inteligente
+Não sabe qual método usar? O modo automático analisa a estrutura matemática do seu problema:
+1.  Verifica se há igualdades ou restrições de "maior que".
+2.  Normaliza o problema.
+3.  Decide se usa **Primal**, **Dual** ou o **Método Big M** (Grande M).
 
-## 🐛 Contato e Relatório de Bugs
+### 📐 Método Big M (Grande M)
+Implementação robusta para lidar com problemas difíceis que não possuem uma solução inicial óbvia (como aqueles com restrições $=$ ou $\ge$). O sistema adiciona automaticamente variáveis artificiais e aplica penalidades para encontrar a solução real.
 
-Encontrou um bug ou tem sugestões de melhoria? Existem duas formas principais de entrar em contato:
+### 🔄 Dual Simplex
+Capaz de resolver problemas onde a função objetivo satisfaz a condição de otimalidade, mas as restrições são violadas (RHS negativo). Essencial para análises de sensibilidade e problemas de minimização convertidos.
 
-1.  **(Preferencial) Abrir uma Issue:** Para relatórios técnicos de bugs, por favor, abra uma **[Issue](https://github.com/Edy-py/PlataformaSimplex/issues)** neste repositório.
-    * Ao relatar, inclua os valores de entrada, o método/modo e a mensagem de erro.
+### 📊 Visualização Didática
+Perfeito para estudantes! Diferente de solucionadores "caixa preta" (como o Excel Solver), aqui você vê a matemática acontecendo quadro a quadro.
 
-2.  **(Contato Profissional) E-mail:** Para outras questões, sugestões ou contato profissional, você pode me encontrar em:
-    * **edilsonalvesprofissional@gmail.com**
+---
+
+## 🛠️ Tecnologias
+
+* **Front-end:** Streamlit (Interface limpa e responsiva).
+* **Back-end:** Python puro.
+* **Matemática:** NumPy (Álgebra linear e manipulação de matrizes) e Pandas (Estruturação dos quadros).
+
+---
+
+## 🐛 Contato e Suporte
+
+Encontrou um bug nos cálculos ou tem uma sugestão?
+
+1.  **(Preferencial) GitHub Issues:** Abra uma **[Issue](https://github.com/Edy-py/PlataformaSimplex/issues)** detalhando o problema (inclua os valores usados).
+2.  **(E-mail):** Para contato profissional: **edilsonalvesprofissional@gmail.com**
 
 ## 🧠 Nota sobre o Desenvolvimento
 
-> Uma parte significativa da interface de usuário (front-end) desta aplicação foi desenvolvida com o auxílio de ferramentas de Inteligência Artificial. Os componentes gerados pela IA foram então revisados, ajustados e integrados manualmente por mim (**Edy**) para garantir a funcionalidade correta e a conexão com os algoritmos de Simplex (back-end).
+> Uma parte significativa da interface de usuário (front-end) desta aplicação foi desenvolvida com o auxílio de ferramentas de Inteligência Artificial. Os componentes gerados pela IA foram rigorosamente revisados, ajustados e a lógica matemática (back-end) foi integrada e validada manualmente por mim (**Edy**) para garantir precisão nos resultados.
 
 ---
 Desenvolvido por **Edy** 🧠
